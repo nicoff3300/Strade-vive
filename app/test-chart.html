@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Radar Chart Test - Taste Map Generator</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #f5f5f5;
+      margin: 0;
+      padding: 40px;
+    }
+    h1 { color: #333; margin-bottom: 10px; }
+    h2 { color: #666; font-size: 16px; font-weight: normal; }
+    .chart-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 30px;
+      margin-top: 30px;
+    }
+    .chart-card {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .chart-card h3 {
+      margin: 0 0 15px 0;
+      font-size: 18px;
+      color: #333;
+    }
+    .chart-card .svg-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 320px;
+      background: #fafafa;
+      border-radius: 8px;
+      padding: 10px;
+    }
+    .svg-string {
+      margin-top: 15px;
+      padding: 15px;
+      background: #f0f0f0;
+      border-radius: 6px;
+      font-family: monospace;
+      font-size: 11px;
+      max-height: 150px;
+      overflow-y: auto;
+      word-break: break-all;
+    }
+    .test-controls {
+      margin-top: 30px;
+      padding: 20px;
+      background: white;
+      border-radius: 12px;
+    }
+    .test-controls h3 { margin-top: 0; }
+    .custom-config {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 15px;
+      margin-top: 15px;
+    }
+    .form-group label {
+      display: block;
+      font-size: 12px;
+      color: #666;
+      margin-bottom: 5px;
+    }
+    .form-group input, .form-group select {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      background: #FF6B35;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    button:hover { background: #e55a2b; }
+  </style>
+</head>
+<body>
+  <h1>🍹 Radar Chart Generator Test</h1>
+  <h2>Print-quality taste map radar charts for BP LAB 2026 menu</h2>
+  
+  <div id="charts-container" class="chart-grid"></div>
+  
+  <div class="test-controls">
+    <h3>🎨 Custom Configuration Test</h3>
+    <div class="custom-config">
+      <div class="form-group">
+        <label>Width (px)</label>
+        <input type="number" id="cfg-width" value="300">
+      </div>
+      <div class="form-group">
+        <label>Height (px)</label>
+        <input type="number" id="cfg-height" value="300">
+      </div>
+      <div class="form-group">
+        <label>Grid Color</label>
+        <input type="color" id="cfg-grid-color" value="#e0e0e0">
+      </div>
+      <div class="form-group">
+        <label>Area Color</label>
+        <input type="color" id="cfg-area-color" value="#FF6B35">
+      </div>
+      <div class="form-group">
+        <label>Opacity (0-1)</label>
+        <input type="number" id="cfg-opacity" value="0.3" step="0.1" min="0" max="1">
+      </div>
+    </div>
+    <button onclick="renderCustomTest()">Render Custom Test</button>
+    <div id="custom-output" style="margin-top: 20px;"></div>
+  </div>
+
+  <script src="js/chart-generator.js"></script>
+  <script>
+    // Sample drink data from drinks.json - BIANCO SPORCO (first drink)
+    const sampleDrinks = [
+      {
+        name: "BIANCO SPORCO",
+        taste: { sweet: 4.0, acid: 3.0, bitter: 2.0, labFactor: 3.0 }
+      },
+      {
+        name: "EL DORADO",
+        taste: { sweet: 3.0, acid: 2.0, bitter: 4.0, labFactor: 3.0 }
+      },
+      {
+        name: "THE ORANGE COUNTY",
+        taste: { sweet: 4.0, acid: 4.0, bitter: 4.0, labFactor: 3.0 }
+      },
+      {
+        name: "RED • EMPTION",
+        taste: { sweet: 3.0, acid: 3.0, bitter: 4.0, labFactor: 4.0 }
+      },
+      {
+        name: "PINK FLUID",
+        taste: { sweet: 5.0, acid: 2.0, bitter: 2.0, labFactor: 5.0 }
+      },
+      {
+        name: "PURPLE RAIN",
+        taste: { sweet: 3.0, acid: 0.0, bitter: 4.0, labFactor: 3.0 }
+      },
+      {
+        name: "BLU WAVE",
+        taste: { sweet: 2.0, acid: 1.0, bitter: 2.0, labFactor: 5.0 }
+      },
+      {
+        name: "GREEN MATCHA",
+        taste: { sweet: 3.0, acid: 3.0, bitter: 3.0, labFactor: 3.0 }
+      }
+    ];
+    
+    // Color schemes for variety
+    const colorSchemes = [
+      { grid: '#e0e0e0', area: '#FF6B35', axis: '#333333', text: '#333333' },
+      { grid: '#d4a574', area: '#D4AF37', axis: '#2c1810', text: '#2c1810' },
+      { grid: '#b8d4e3', area: '#4A90A4', axis: '#1a3a4a', text: '#1a3a4a' },
+      { grid: '#c8b6d6', area: '#9B59B6', axis: '#4a235a', text: '#4a235a' },
+      { grid: '#a8d5a2', area: '#27AE60', axis: '#1e4d2b', text: '#1e4d2b' },
+      { grid: '#f5b7b1', area: '#E74C3C', axis: '#78281f', text: '#78281f' },
+      { grid: '#fad7a0', area: '#F39C12', axis: '#7d5a00', text: '#7d5a00' },
+      { grid: '#aed6f1', area: '#3498DB', axis: '#1a5276', text: '#1a5276' }
+    ];
+    
+    // Render all sample drink charts
+    function renderAllCharts() {
+      const container = document.getElementById('charts-container');
+      container.innerHTML = '';
+      
+      sampleDrinks.forEach((drink, index) => {
+        const config = {
+          width: 300,
+          height: 300,
+          colors: colorSchemes[index % colorSchemes.length],
+          opacity: 0.3
+        };
+        
+        const svg = generateRadar(drink, config);
+        
+        const card = document.createElement('div');
+        card.className = 'chart-card';
+        card.innerHTML = `
+          <h3>${drink.name}</h3>
+          <p style="font-size: 12px; color: #666; margin-bottom: 10px;">
+            Sweet: ${drink.taste.sweet} | Acid: ${drink.taste.acid} | 
+            Bitter: ${drink.taste.bitter} | Lab: ${drink.taste.labFactor}
+          </p>
+          <div class="svg-container">${svg}</div>
+          <details>
+            <summary style="cursor: pointer; font-size: 12px; color: #666; margin-top: 10px;">View SVG String</summary>
+            <div class="svg-string">${escapeHtml(svg.substring(0, 500))}...</div>
+          </details>
+        `;
+        container.appendChild(card);
+      });
+      
+      console.log('✅ All charts rendered successfully');
+      console.log('Sample SVG for BIANCO SPORCO:');
+      console.log(generateRadar(sampleDrinks[0], {
+        width: 300,
+        height: 300,
+        colors: colorSchemes[0],
+        opacity: 0.3
+      }));
+    }
+    
+    // Escape HTML for display
+    function escapeHtml(str) {
+      return str.replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;');
+    }
+    
+    // Render custom test with form values
+    function renderCustomTest() {
+      const width = parseInt(document.getElementById('cfg-width').value) || 300;
+      const height = parseInt(document.getElementById('cfg-height').value) || 300;
+      const gridColor = document.getElementById('cfg-grid-color').value;
+      const areaColor = document.getElementById('cfg-area-color').value;
+      const opacity = parseFloat(document.getElementById('cfg-opacity').value) || 0.3;
+      
+      const config = {
+        width,
+        height,
+        colors: {
+          grid: gridColor,
+          area: areaColor,
+          axis: '#333333',
+          text: '#333333'
+        },
+        opacity
+      };
+      
+      const svg = generateRadar(sampleDrinks[0], config);
+      
+      const output = document.getElementById('custom-output');
+      output.innerHTML = `
+        <h4 style="margin-bottom: 10px;">Custom Chart Result</h4>
+        <div style="display: flex; justify-content: center; background: #fafafa; padding: 20px; border-radius: 8px;">
+          ${svg}
+        </div>
+        <details style="margin-top: 15px;">
+          <summary style="cursor: pointer; font-size: 12px;">Full SVG Code</summary>
+          <pre style="background: #f0f0f0; padding: 15px; border-radius: 6px; overflow-x: auto; font-size: 11px;">${escapeHtml(svg)}</pre>
+        </details>
+      `;
+    }
+    
+    // Initialize on load
+    renderAllCharts();
+  </script>
+</body>
+</html>

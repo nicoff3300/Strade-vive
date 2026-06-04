@@ -1,0 +1,5 @@
+.DS_Store
+*.pyc
+__pycache__/
+.gemini/
+.system_generated/

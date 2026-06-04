@@ -1,0 +1,575 @@
+{
+  "title": "La Via dei Colori",
+  "subtitle": "BP LAB",
+  "prefazione": [
+    ""
+  ],
+  "vermouth_experience": {
+    "vermouth": [
+      "Red",
+      "Dry",
+      "White"
+    ],
+    "bitter": [
+      "Citrus",
+      "Asia",
+      "Herbs",
+      "Flower"
+    ],
+    "spezie": [
+      "Cardamomo",
+      "Anice Stellato",
+      "Chiodi di Garofano",
+      "Zest Limone",
+      "Zest Arancia",
+      "Zest Pompelmo"
+    ]
+  },
+  "tasteMapLegend": {
+    "sweet": {
+      "label": "Dolcezza (Sweet)",
+      "max": 5
+    },
+    "acid": {
+      "label": "Acidità (Sour/Acid)",
+      "max": 5
+    },
+    "bitter": {
+      "label": "Amaro (Bitter)",
+      "max": 5
+    },
+    "labFactor": {
+      "label": "Fattore Lab / Carattere (Factor)",
+      "max": 5
+    }
+  },
+  "drinks": [
+    {
+      "number": 1,
+      "section": "La Via del Colore",
+      "category": "Signature",
+      "name": "BIANCO SPORCO",
+      "profile": "DOLCE - CREMOSO",
+      "ingredients": [
+        "GIN BARMASTER",
+        "CORDIALE DI LATTE DI MANDORLA",
+        "MELONE BIANCO",
+        "CORDIAL PANDAN & COCONUT",
+        "MERINGUE"
+      ],
+      "taste": {
+        "sweet": 4,
+        "acid": 3,
+        "bitter": 2,
+        "labFactor": 3
+      },
+      "hasChart": true,
+      "page": null
+    },
+    {
+      "number": 2,
+      "section": "La Via del Colore",
+      "category": "Signature",
+      "name": "EL DORADO",
+      "profile": "FRESCO - SPARKLING",
+      "ingredients": [
+        "CORRALEJO TEQUILA INFUSO ALLA CURCUMA",
+        "GALLIANO",
+        "CORDIALE ANANAS",
+        "SODA BERGAMOTO/MANDARINO",
+        "FOGLIE DI BAMBÙ"
+      ],
+      "taste": {
+        "sweet": 3,
+        "acid": 2,
+        "bitter": 4,
+        "labFactor": 3
+      },
+      "hasChart": true,
+      "page": null
+    },
+    {
+      "number": 3,
+      "section": "La Via del Colore",
+      "category": "Signature",
+      "name": "THE ORANGE COUNTY",
+      "profile": "ESOTICO - SPICED",
+      "ingredients": [
+        "RUM MIX:",
+        "- BOTRAN BIANCO GUATEMALA",
+        "- WORTY PARK JAMAICA 12 ANNI",
+        "- CLARIN COMMUNAL HAITI"
+      ],
+      "taste": {
+        "sweet": 4,
+        "acid": 4,
+        "bitter": 4,
+        "labFactor": 3
+      },
+      "hasChart": true,
+      "page": null
+    },
+    {
+      "number": 4,
+      "section": "La Via del Colore",
+      "category": "Signature",
+      "name": "RED • EMPTION",
+      "profile": "AFFUMICATO - AROMATICO",
+      "ingredients": [
+        "MEZCAL 400 CONEJOS",
+        "INFUSO ALLE BACCHE DI GOJI",
+        "SOTOL ONO",
+        "GAMONDI PINK CITRUS",
+        "VERJUS AL LAMPONE",
+        "PEPERONCINO AGRODOLCE"
+      ],
+      "taste": {
+        "sweet": 3,
+        "acid": 3,
+        "bitter": 4,
+        "labFactor": 4
+      },
+      "hasChart": true,
+      "page": null
+    },
+    {
+      "number": 5,
+      "section": "La Via del Colore",
+      "category": "Signature",
+      "name": "PINK FLUID",
+      "profile": "SILKY - TROPICALE",
+      "ingredients": [
+        "PRINCESA CACHACA",
+        "BITTER MAZZETTI INFUSO ALLA BANANA",
+        "CORDIALE GUAVA ROSA & MANDORLA",
+        "MILK WASH YOGURT AL MANDORLA",
+        "ST JAMES BITTER",
+        "CANDY FLOSS & BERRY DUST"
+      ],
+      "taste": {
+        "sweet": 5,
+        "acid": 2,
+        "bitter": 2,
+        "labFactor": 5
+      },
+      "hasChart": true,
+      "page": null
+    },
+    {
+      "number": 6,
+      "section": "La Via del Colore",
+      "category": "Signature",
+      "name": "PURPLE RAIN",
+      "profile": "FLOREALE - SOUR",
+      "ingredients": [
+        "GRAPPA GAIARINE PROSECCO",
+        "INFUSO AL BUTTERFLY PEA FLOWERS & CARDAMOMO",
+        "VERMOUTH CINZANO RISERVA AMBRATO",
+        "CORDIALE LIMONE & BERGAMOTTO",
+        "VELUTO LAVANDA & IBISCO"
+      ],
+      "taste": {
+        "sweet": 3,
+        "acid": 0,
+        "bitter": 4,
+        "labFactor": 3
+      },
+      "hasChart": true,
+      "page": null
+    },
+    {
+      "number": 7,
+      "section": "La Via del Colore",
+      "category": "Signature",
+      "name": "BLU WAVE",
+      "profile": "SAPIDO - DRY",
+      "ingredients": [
+        "MAZZETTI GIN INFUSO FINOCCHIO E SEDANO",
+        "RUM-BAR SILVER JAMAICA RUM",
+        "CORDIALE BLUEBERRY",
+        "TONICA MEDITERRANEA ORSINI",
+        "CAPPERO IN FIORE & ARIA DI MARE"
+      ],
+      "taste": {
+        "sweet": 2,
+        "acid": 1,
+        "bitter": 2,
+        "labFactor": 5
+      },
+      "hasChart": true,
+      "page": null
+    },
+    {
+      "number": 8,
+      "section": "La Via del Colore",
+      "category": "Signature",
+      "name": "GREEN MATCHA",
+      "profile": "ERBACEO - SETOSO",
+      "ingredients": [
+        "KOSHI NO SHINOBU WHISKEY",
+        "SAKE YUZU",
+        "CORDIALE FIENO GRECO TE VERDE & BAMBÙ",
+        "SPUMA DI LATTE DI RISO MANDORLA & MENTA"
+      ],
+      "taste": {
+        "sweet": 3,
+        "acid": 3,
+        "bitter": 3,
+        "labFactor": 3
+      },
+      "hasChart": true,
+      "page": null
+    },
+    {
+      "number": 1,
+      "section": "Le Nostre Proposte",
+      "category": "LE NOSTRE PROPOSTE INTRAMONTABILI - VINTAGE - CONTEMPORANEI",
+      "name": "MORNING BREEZE",
+      "profile": "FRESCO - FRUTTATO",
+      "ingredients": [],
+      "taste": {
+        "sweet": null,
+        "acid": null,
+        "bitter": null,
+        "labFactor": null
+      },
+      "hasChart": false,
+      "page": ".10"
+    },
+    {
+      "number": 2,
+      "section": "Le Nostre Proposte",
+      "category": "LE NOSTRE PROPOSTE INTRAMONTABILI - VINTAGE - CONTEMPORANEI",
+      "name": "TRINIDAD ICED TEA",
+      "profile": "SPICED - SPARKLING",
+      "ingredients": [
+        "Kingston Rum",
+        "Liquore al Te Nero",
+        "Amaro di Angostura",
+        "Ginger Beer",
+        "Lime"
+      ],
+      "taste": {
+        "sweet": null,
+        "acid": null,
+        "bitter": null,
+        "labFactor": null
+      },
+      "hasChart": false,
+      "page": ".10"
+    },
+    {
+      "number": 3,
+      "section": "Le Nostre Proposte",
+      "category": "LE NOSTRE PROPOSTE INTRAMONTABILI - VINTAGE - CONTEMPORANEI",
+      "name": "BASIL SMASH",
+      "profile": "AGRUMATO - BASILICO",
+      "ingredients": [
+        "Tanqueray Gin",
+        "Basilico",
+        "Limone",
+        "Zucchero"
+      ],
+      "taste": {
+        "sweet": null,
+        "acid": null,
+        "bitter": null,
+        "labFactor": null
+      },
+      "hasChart": false,
+      "page": ".10"
+    },
+    {
+      "number": 4,
+      "section": "Le Nostre Proposte",
+      "category": "LE NOSTRE PROPOSTE INTRAMONTABILI - VINTAGE - CONTEMPORANEI",
+      "name": "MAI - TAI \"44\"",
+      "profile": "ESOTICO - DECISO",
+      "ingredients": [
+        "\"La B\" Rum Mix",
+        "Zacapa 23",
+        "Bacardi",
+        "Clairin Communal",
+        "Dry Curacao",
+        "Lime",
+        "Orzata",
+        "Angostura Bitter"
+      ],
+      "taste": {
+        "sweet": null,
+        "acid": null,
+        "bitter": null,
+        "labFactor": null
+      },
+      "hasChart": false,
+      "page": ".10"
+    },
+    {
+      "number": 5,
+      "section": "Le Nostre Proposte",
+      "category": "LE NOSTRE PROPOSTE INTRAMONTABILI - VINTAGE - CONTEMPORANEI",
+      "name": "TOMMY'S MARGARITA",
+      "profile": "AGAVE - ASPRO",
+      "ingredients": [
+        "Casamigos Tequila",
+        "Lime",
+        "Agave",
+        "Sale Nero"
+      ],
+      "taste": {
+        "sweet": null,
+        "acid": null,
+        "bitter": null,
+        "labFactor": null
+      },
+      "hasChart": false,
+      "page": ".10"
+    },
+    {
+      "number": 6,
+      "section": "Le Nostre Proposte",
+      "category": "LE NOSTRE PROPOSTE INTRAMONTABILI - VINTAGE - CONTEMPORANEI",
+      "name": "KNICKERBOCKER",
+      "profile": "FRESCO - ESOTICO",
+      "ingredients": [
+        "Zacapa 23",
+        "Saint James Rhum Martinique",
+        "Cointreau",
+        "Lime",
+        "Lampone"
+      ],
+      "taste": {
+        "sweet": null,
+        "acid": null,
+        "bitter": null,
+        "labFactor": null
+      },
+      "hasChart": false,
+      "page": ".10"
+    },
+    {
+      "number": 7,
+      "section": "Le Nostre Proposte",
+      "category": "LE NOSTRE PROPOSTE INTRAMONTABILI - VINTAGE - CONTEMPORANEI",
+      "name": "PENICILLIN",
+      "profile": "AFFUMICATO - SPEZIATO",
+      "ingredients": [
+        "Scotch Whiskey",
+        "Bland Whiskey",
+        "Honey Ginger Mix e Lime Fresh"
+      ],
+      "taste": {
+        "sweet": null,
+        "acid": null,
+        "bitter": null,
+        "labFactor": null
+      },
+      "hasChart": false,
+      "page": ".10"
+    },
+    {
+      "number": 8,
+      "section": "Le Nostre Proposte",
+      "category": "AFTER DINNER - SALTO NEL PASSATO - VINTAGE (GUSTI AUTENTICI)",
+      "name": "HANKY PANKY",
+      "profile": "AROMATICO - GINEPRO",
+      "ingredients": [],
+      "taste": {
+        "sweet": null,
+        "acid": null,
+        "bitter": null,
+        "labFactor": null
+      },
+      "hasChart": false,
+      "page": ".10"
+    },
+    {
+      "number": 9,
+      "section": "Le Nostre Proposte",
+      "category": "AFTER DINNER - SALTO NEL PASSATO - VINTAGE (GUSTI AUTENTICI)",
+      "name": "VIEUX CARRÉ",
+      "profile": "ABBOCCATO - AROMATICO",
+      "ingredients": [
+        "Cognac",
+        "Bullet Rye Whiskey",
+        "Vermouth Rosso del Professore",
+        "Dom Benedictine",
+        "Peychaud's Bitter"
+      ],
+      "taste": {
+        "sweet": null,
+        "acid": null,
+        "bitter": null,
+        "labFactor": null
+      },
+      "hasChart": false,
+      "page": ".10"
+    },
+    {
+      "number": 10,
+      "section": "Le Nostre Proposte",
+      "category": "AFTER DINNER - SALTO NEL PASSATO - VINTAGE (GUSTI AUTENTICI)",
+      "name": "SAZERAC",
+      "profile": "ANICE - DECISO",
+      "ingredients": [
+        "Bullet Rye Whiskey",
+        "Zucchero",
+        "Assenzio",
+        "Peychaud's Bitter"
+      ],
+      "taste": {
+        "sweet": null,
+        "acid": null,
+        "bitter": null,
+        "labFactor": null
+      },
+      "hasChart": false,
+      "page": ".10"
+    },
+    {
+      "number": 11,
+      "section": "Le Nostre Proposte",
+      "category": "AFTER DINNER - SALTO NEL PASSATO - VINTAGE (GUSTI AUTENTICI)",
+      "name": "ROB ROY",
+      "profile": "AFFUMICATO - DECISO",
+      "ingredients": [
+        "Monkey Shoulder Whisky",
+        "Laphroaig 10",
+        "Vermouth Rosso del Professore",
+        "Angostura Bitter"
+      ],
+      "taste": {
+        "sweet": null,
+        "acid": null,
+        "bitter": null,
+        "labFactor": null
+      },
+      "hasChart": false,
+      "page": ".10"
+    },
+    {
+      "number": 12,
+      "section": "Le Nostre Proposte",
+      "category": "AFTER DINNER - SALTO NEL PASSATO - VINTAGE (GUSTI AUTENTICI)",
+      "name": "TUXEDO",
+      "profile": "DECISO - DRY",
+      "ingredients": [
+        "Old Tom Gin",
+        "Vermouth Dry",
+        "Maraschino",
+        "Orange Bitter"
+      ],
+      "taste": {
+        "sweet": null,
+        "acid": null,
+        "bitter": null,
+        "labFactor": null
+      },
+      "hasChart": false,
+      "page": ".10"
+    },
+    {
+      "number": 1,
+      "section": "Analcolici",
+      "category": "Alcohol Free",
+      "name": "AMERICA-NO",
+      "profile": "APERITIVO - BITTER",
+      "ingredients": [
+        "Martini Vibrante 0%",
+        "Bitter Sober 0%",
+        "Acqua Tonica"
+      ],
+      "taste": {
+        "sweet": null,
+        "acid": null,
+        "bitter": null,
+        "labFactor": null
+      },
+      "hasChart": false,
+      "page": null
+    },
+    {
+      "number": 2,
+      "section": "Analcolici",
+      "category": "Alcohol Free",
+      "name": "LILY'S PASSION",
+      "profile": "FRESCO - AGRUMATO",
+      "ingredients": [
+        "Whiskey 0%",
+        "PassionFruit",
+        "Soda al Pompelmo Rosa"
+      ],
+      "taste": {
+        "sweet": null,
+        "acid": null,
+        "bitter": null,
+        "labFactor": null
+      },
+      "hasChart": false,
+      "page": null
+    },
+    {
+      "number": 3,
+      "section": "Analcolici",
+      "category": "Alcohol Free",
+      "name": "CALIFORNICATION",
+      "profile": "DOLCE - FRUTTATO",
+      "ingredients": [
+        "Rum 0%",
+        "Sherbet al Limone",
+        "Lampone",
+        "Cranberry"
+      ],
+      "taste": {
+        "sweet": null,
+        "acid": null,
+        "bitter": null,
+        "labFactor": null
+      },
+      "hasChart": false,
+      "page": null
+    },
+    {
+      "number": 4,
+      "section": "Analcolici",
+      "category": "Alcohol Free",
+      "name": "BASIL MULE",
+      "profile": "FRESCO - SPICY",
+      "ingredients": [
+        "Gin 0%",
+        "Cordiale Lime",
+        "Basilico",
+        "Ginger Beer"
+      ],
+      "taste": {
+        "sweet": null,
+        "acid": null,
+        "bitter": null,
+        "labFactor": null
+      },
+      "hasChart": false,
+      "page": null
+    },
+    {
+      "number": 5,
+      "section": "Analcolici",
+      "category": "Alcohol Free",
+      "name": "MORNING BREEZE",
+      "profile": "FRESCO - SPICY",
+      "ingredients": [
+        "Gin 0%",
+        "Grapefruit Juice e Cidro di Mela",
+        "Infuso al Cranberry",
+        "Ginger Beer"
+      ],
+      "taste": {
+        "sweet": null,
+        "acid": null,
+        "bitter": null,
+        "labFactor": null
+      },
+      "hasChart": false,
+      "page": null
+    }
+  ]
+}

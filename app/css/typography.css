@@ -1,0 +1,147 @@
+/* Font Declarations */
+@font-face {
+    font-family: 'Tuaf';
+    src: url('../fonts/TuafTrial-Bold.otf') format('opentype');
+    font-weight: 700;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Tuaf';
+    src: url('../fonts/TuafTrial-BoldIt.otf') format('opentype');
+    font-weight: 700;
+    font-style: italic;
+}
+@font-face {
+    font-family: 'ABC Camera';
+    src: url('../fonts/ABCCameraPlain-Regular-Trial.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'ABC Camera';
+    src: url('../fonts/ABCCameraPlain-RegularItalic-Trial.otf') format('opentype');
+    font-weight: 400;
+    font-style: italic;
+}
+@font-face {
+    font-family: 'ABC Camera';
+    src: url('../fonts/ABCCameraPlain-Bold-Trial.otf') format('opentype');
+    font-weight: 700;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'ABC Camera';
+    src: url('../fonts/ABCCameraPlain-BoldItalic-Trial.otf') format('opentype');
+    font-weight: 700;
+    font-style: italic;
+}
+
+/* Base Typography and Color Palette */
+:root {
+    --color-bg: #121420;
+    --color-h1: #F2CD77;
+    --color-h2: #7BBEBC;
+    --color-h3: #e0e0e0;
+    --color-body: #e0e0e0;
+    --color-caption: #a0a0a0;
+    --color-border: rgba(242, 205, 121, 0.3);
+
+    --font-display: 'Tuaf', sans-serif;
+    --font-body: 'ABC Camera', sans-serif;
+    
+    --bleed: 3mm;
+    --page-width: 148mm;
+    --page-height: 210mm;
+}
+
+* {
+    box-sizing: border-box;
+    -webkit-print-color-adjust: exact;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--color-bg);
+    color: var(--color-body);
+    font-family: var(--font-body);
+    line-height: 1.6;
+}
+
+h1, h2, h3 {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.display-large {
+    font-family: var(--font-display);
+    font-size: 28pt;
+    line-height: 1.2;
+    color: var(--color-h1);
+}
+
+.display-medium {
+    font-family: var(--font-display);
+    font-size: 18pt;
+    color: var(--color-h1);
+}
+
+.profile-tag {
+    font-family: var(--font-body);
+    font-size: 12pt;
+    text-transform: uppercase;
+    color: var(--color-h2);
+    letter-spacing: 1px;
+    font-style: italic;
+}
+
+.ingredient-list {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+    font-size: 10pt;
+    text-transform: uppercase;
+}
+
+.ingredient-list li {
+    margin-bottom: 4px;
+    padding-left: 15px;
+    position: relative;
+}
+
+.ingredient-list li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--color-h1);
+}
+
+.page-number {
+    position: absolute;
+    bottom: 15mm;
+    font-size: 8pt;
+    color: var(--color-caption);
+    text-align: center;
+    width: 100%;
+}
+
+.quote {
+    font-style: italic;
+    color: var(--color-body);
+    margin: 1.5em 0;
+    font-size: 12pt;
+    line-height: 1.8;
+    text-align: center;
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.quote-cite {
+    display: block;
+    text-align: right;
+    font-size: 10pt;
+    color: var(--color-h1);
+    margin-top: 5px;
+}

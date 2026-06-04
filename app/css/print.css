@@ -1,0 +1,49 @@
+@page {
+    size: A5;
+    margin: 0;
+    bleed: 3mm;
+}
+
+@media print {
+    body {
+        background: none;
+        padding: 0;
+        display: block;
+    }
+
+    .menu-container, .spread, .single-page-wrapper {
+        display: block;
+        gap: 0;
+        filter: none;
+    }
+
+    .page {
+        width: var(--page-width);
+        height: var(--page-height);
+        padding: 20mm;
+        page-break-after: always;
+        page-break-inside: avoid;
+        -webkit-print-color-adjust: exact;
+        -moz-print-color-adjust: exact;
+        position: relative;
+        box-sizing: border-box;
+        background-color: var(--color-bg) !important;
+    }
+
+    /* For facing pages, we manage the visual order in the HTML */
+    .page:last-child {
+        page-break-after: avoid;
+    }
+
+    /* 3mm Bleed Area Implementation */
+    .page::after {
+        content: "";
+        position: absolute;
+        top: -3mm;
+        bottom: -3mm;
+        left: -3mm;
+        right: -3mm;
+        border: 1px solid #CCC; /* Crop marks reference */
+        pointer-events: none;
+    }
+}

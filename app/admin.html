@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BP LAB 2026 — Admin Panel</title>
+  <link rel="stylesheet" href="css/typography.css">
+  <link rel="stylesheet" href="css/admin.css">
+  <link rel="stylesheet" href="css/screen.css">
+  <link rel="stylesheet" href="css/print.css">
+</head>
+<body>
+  <div class="admin-layout">
+
+    <nav class="admin-nav">
+      <div class="admin-nav-header">
+        <h1>BP LAB 2026</h1>
+        <span>Admin Panel</span>
+      </div>
+      <div class="admin-nav-list" id="pageNavList"></div>
+      <div class="admin-nav-footer">
+        <button class="admin-btn gold" id="btnAddBlank">+ Nuova Pagina</button>
+        <button class="admin-btn danger" id="btnDeletePage">🗑 Elimina</button>
+      </div>
+    </nav>
+
+    <main class="admin-preview">
+      <div class="admin-preview-toolbar">
+        <button class="preview-mode-btn active" data-mode="single">Pagina</button>
+        <button class="preview-mode-btn" data-mode="spread">Spread</button>
+        <button class="preview-mode-btn" data-mode="all">Tutte</button>
+        <span style="flex:1;"></span>
+        <input type="range" class="zoom-slider" id="ctrlZoom" min="10" max="200" value="100">
+        <span style="font-size:10px;color:var(--admin-text-muted);min-width:32px;" id="valZoom">100%</span>
+        <span id="pageIndicator">Pag. 1 / 24</span>
+      </div>
+      <div id="previewContainer"></div>
+    </main>
+
+    <aside class="admin-controls">
+
+      <div class="panels-row">
+
+        <div class="panel-col">
+          <div class="panel-col-header">ASSETS</div>
+          <div class="panel-col-body">
+            <details class="pane-section" open>
+              <summary class="pane-section-title">Colori</summary>
+              <div class="field"><label>Bg</label><div class="color-picker-row"><input type="color" id="colBg" value="#121420"><input class="hex-input" id="hexBg" value="#121420"><span class="swatch" style="background:#121420;"></span></div></div>
+              <div class="field"><label>H1</label><div class="color-picker-row"><input type="color" id="colH1" value="#F2CD77"><input class="hex-input" id="hexH1" value="#F2CD77"><span class="swatch" style="background:#F2CD77;"></span></div></div>
+              <div class="field"><label>H2</label><div class="color-picker-row"><input type="color" id="colH2" value="#7BBEBC"><input class="hex-input" id="hexH2" value="#7BBEBC"><span class="swatch" style="background:#7BBEBC;"></span></div></div>
+              <div class="field"><label>H3</label><div class="color-picker-row"><input type="color" id="colH3" value="#e0e0e0"><input class="hex-input" id="hexH3" value="#e0e0e0"><span class="swatch" style="background:#e0e0e0;"></span></div></div>
+              <div class="field"><label>Body</label><div class="color-picker-row"><input type="color" id="colBody" value="#e0e0e0"><input class="hex-input" id="hexBody" value="#e0e0e0"><span class="swatch" style="background:#e0e0e0;"></span></div></div>
+              <div class="field"><label>Caption</label><div class="color-picker-row"><input type="color" id="colCaption" value="#a0a0a0"><input class="hex-input" id="hexCaption" value="#a0a0a0"><span class="swatch" style="background:#a0a0a0;"></span></div></div>
+              <div id="extraColorsContainer"></div>
+              <button class="admin-btn small" id="btnAddExtraColor" style="font-size:10px;margin-top:6px;">+ Aggiungi Colore</button>
+            </details>
+            <details class="pane-section" open>
+              <summary class="pane-section-title">Tipografia</summary>
+              <div class="field"><label>H1 <span class="val" id="valH1">28</span>pt</label><input type="range" id="ctrlH1" min="12" max="72" step="1" value="28"></div>
+              <div class="field"><label>H2 <span class="val" id="valH2">18</span>pt</label><input type="range" id="ctrlH2" min="10" max="48" step="1" value="18"></div>
+              <div class="field"><label>H3 <span class="val" id="valH3">14</span>pt</label><input type="range" id="ctrlH3" min="8" max="32" step="1" value="14"></div>
+              <div class="field"><label>Body <span class="val" id="valBody">10</span>pt</label><input type="range" id="ctrlBody" min="6" max="18" step="1" value="10"></div>
+              <div class="field"><label>Caption <span class="val" id="valCaption">8</span>pt</label><input type="range" id="ctrlCaption" min="5" max="14" step="1" value="8"></div>
+            </details>
+            <details class="pane-section" open>
+              <summary class="pane-section-title">Spaziatura</summary>
+              <div class="field"><label>Pad Top <span class="val" id="valPadTop">20</span>mm</label><input type="range" id="ctrlPadTop" min="5" max="80" step="1" value="20"></div>
+              <div class="field"><label>Pad Right <span class="val" id="valPadRight">20</span>mm</label><input type="range" id="ctrlPadRight" min="5" max="80" step="1" value="20"></div>
+              <div class="field"><label>Pad Bottom <span class="val" id="valPadBottom">20</span>mm</label><input type="range" id="ctrlPadBottom" min="5" max="80" step="1" value="20"></div>
+              <div class="field"><label>Pad Left <span class="val" id="valPadLeft">20</span>mm</label><input type="range" id="ctrlPadLeft" min="5" max="80" step="1" value="20"></div>
+              <div class="field"><label>Block Gap <span class="val" id="valBlockGap">4</span>mm</label><input type="range" id="ctrlBlockGap" min="0" max="20" step="1" value="4"></div>
+              <div class="field"><label>Line Height <span class="val" id="valLineHeight">1.6</span></label><input type="range" id="ctrlLineHeight" min="1" max="3" step="0.1" value="1.6"></div>
+            </details>
+            <details class="pane-section" open>
+              <summary class="pane-section-title">Stampa</summary>
+              <div class="field"><label>Bleed <span class="val" id="valBleed">3</span>mm</label><input type="range" id="ctrlBleed" min="0" max="10" step="1" value="3"></div>
+              <div class="toggle-wrapper"><label>Crop</label><label class="toggle"><input type="checkbox" id="ctrlCropMarks"><span class="slider-switch"></span></label></div>
+              <div style="display:flex;gap:8px;margin-top:4px;">
+                <div style="flex:1;"><label style="font-size:10px;">W <span class="val" id="valPageW">148</span>mm</label><input type="number" id="ctrlPageW" min="50" max="500" step="1" value="148" style="width:100%;padding:4px;background:rgba(0,0,0,0.2);border:1px solid var(--admin-border);color:var(--admin-text);border-radius:4px;font-size:11px;"></div>
+                <div style="flex:1;"><label style="font-size:10px;">H <span class="val" id="valPageH">185</span>mm</label><input type="number" id="ctrlPageH" min="50" max="500" step="1" value="185" style="width:100%;padding:4px;background:rgba(0,0,0,0.2);border:1px solid var(--admin-border);color:var(--admin-text);border-radius:4px;font-size:11px;"></div>
+              </div>
+            </details>
+          </div>
+        </div>
+
+        <div class="panel-col">
+          <div class="panel-col-header" id="panelPageHeader">PAGINA 1 — Cover</div>
+          <div class="panel-col-body" id="pageControls"></div>
+        </div>
+
+        <div class="panel-col">
+          <div class="panel-col-header">SFONDO</div>
+          <div class="panel-col-body">
+            <div id="webglStatus" class="status-badge offline">&#x23F3; Checking...</div>
+            <div class="webgl-mini-wrap"><canvas id="webglCanvas"></canvas></div>
+            <div class="field"><label>Palette</label><div class="color-swatch-grid" id="webglPaletteSwatches"></div></div>
+            <div class="field"><label>Row <span class="val" id="valWebglPerRow">4</span></label><input type="range" id="webglPerRow" min="1" max="15" step="1" value="4"></div>
+            <div class="field"><label>MX <span class="val" id="valWebglMarginX">0</span></label><input type="range" id="webglMarginX" min="0" max="200" step="1" value="0"></div>
+            <div class="field"><label>MY <span class="val" id="valWebglMarginY">0</span></label><input type="range" id="webglMarginY" min="0" max="200" step="1" value="0"></div>
+            <div class="field"><label>GX <span class="val" id="valWebglGapX">0</span></label><input type="range" id="webglGapX" min="0" max="100" step="1" value="0"></div>
+            <div class="field"><label>GY <span class="val" id="valWebglGapY">0</span></label><input type="range" id="webglGapY" min="0" max="100" step="1" value="0"></div>
+            <div class="toggle-wrapper"><label>Big Tiles</label><label class="toggle"><input type="checkbox" id="webglBigTiles" checked><span class="slider-switch"></span></label></div>
+<div class="toggle-wrapper"><label>Use Pairs</label><label class="toggle"><input type="checkbox" id="webglUsePairs"><span class="slider-switch"></span></label></div>
+            <div class="field"><label>Prob <span class="val" id="valWebglBigTileProb">.30</span></label><input type="range" id="webglBigTileProb" min="0" max="1" step="0.05" value="0.30"></div>
+            <select class="admin-select" id="webglBigTileMode" style="margin-bottom:6px;"><option value="auto">Auto</option><option value="2x1">2&times;1</option><option value="1x2">1&times;2</option><option value="2x2" selected>2&times;2</option></select>
+            <div style="display:flex;gap:4px;">
+              <button class="admin-btn primary" id="btnWebglGenerate" style="flex:1;font-size:9px;">GENERA</button>
+              <button class="admin-btn gold" id="btnWebglApply" style="flex:1;font-size:9px;">APPLICA</button>
+            </div>
+            <div id="webglBgGrid" class="bg-thumb-grid"></div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="export-row">
+        <button class="admin-btn gold" id="btnExportPDF">PDF STAMPA</button>
+        <button class="admin-btn gold" id="btnExportPDFPages">PDF PAGINE</button>
+        <button class="admin-btn" id="btnExportHTML">HTML</button>
+        <button class="admin-btn" id="btnExportJSON">JSON</button>
+        <button class="admin-btn" id="btnUndo" style="background:rgba(255,255,255,0.05);border-color:var(--admin-border);" title="Annulla (Cmd+Z)">Annulla</button>
+        <button class="admin-btn" id="btnRedo" style="background:rgba(255,255,255,0.05);border-color:var(--admin-border);" title="Ripristina (Cmd+Shift+Z)">Ripristina</button>
+        <button class="admin-btn danger" id="btnResetDefault">Reset</button>
+      </div>
+
+    </aside>
+
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="js/chart-generator.js?v=6"></script>
+  <script src="js/admin-state.js?v=6"></script>
+  <script src="js/admin-preview.js?v=6"></script>
+  <script src="js/admin-webgl.js?v=6"></script>
+  <script src="js/admin.js?v=6"></script>
+</body>
+</html>
