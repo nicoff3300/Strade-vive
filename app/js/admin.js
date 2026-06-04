@@ -1347,18 +1347,8 @@
       rowAddText.addEventListener('click', function(e) {
         e.stopPropagation();
         var rowNum = parseInt(this.getAttribute('data-row'), 10);
-        var blk = adminState.addBlock(page, 'text');
+        var blk = adminState.addBlock(page, 'text', rowNum);
         if (blk) {
-          blk.gridRow = rowNum;
-          var pi = adminState.getState().pages[String(page)];
-          var ci = 0;
-          if (pi && pi.blocks) {
-            for (var k = 0; k < pi.blocks.length; k++) {
-              if (pi.blocks[k].gridRow === rowNum && pi.blocks[k].id !== blk.id) ci = Math.max(ci, (pi.blocks[k].colIndex || 0));
-            }
-          }
-          blk.colIndex = ci + 1;
-          adminState.saveToStorage();
           adminState.selectBlock(page, blk.id);
         }
         updateAll();
@@ -1368,18 +1358,8 @@
       rowAddImage.addEventListener('click', function(e) {
         e.stopPropagation();
         var rowNum = parseInt(this.getAttribute('data-row'), 10);
-        var blk = adminState.addBlock(page, 'image');
+        var blk = adminState.addBlock(page, 'image', rowNum);
         if (blk) {
-          blk.gridRow = rowNum;
-          var pi = adminState.getState().pages[String(page)];
-          var ci = 0;
-          if (pi && pi.blocks) {
-            for (var k = 0; k < pi.blocks.length; k++) {
-              if (pi.blocks[k].gridRow === rowNum && pi.blocks[k].id !== blk.id) ci = Math.max(ci, (pi.blocks[k].colIndex || 0));
-            }
-          }
-          blk.colIndex = ci + 1;
-          adminState.saveToStorage();
           adminState.selectBlock(page, blk.id);
         }
         updateAll();

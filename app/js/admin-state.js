@@ -764,22 +764,33 @@ window.AdminState = (function() {
       this.saveToStorage();
     },
 
-    addBlock: function(pageNum, type) {
+    addBlock: function(pageNum, type, rowNum) {
       var p = String(pageNum);
       var page = state.pages[p];
       if (!page) return null;
       if (!page.blocks) page.blocks = [];
       if (!page.grid) page.grid = { rows: [{ id: 'r1', cols: 1, gap: 4 }], rowGap: 4 };
       var grid = page.grid;
-      var existing = page.blocks.length;
-      var newId = 'b' + (existing + 1);
-      var rowIdx = existing < (grid.rows || []).length ? (existing + 1) : 1;
+      
+      // Unique block ID generation
+      var ids = page.blocks.map(function(b) { return b.id; });
+      var counter = page.blocks.length + 1;
+      while (ids.indexOf('b' + counter) >= 0) {
+        counter++;
+      }
+      var newId = 'b' + counter;
+
+      var rowIdx = (typeof rowNum === 'number' && !isNaN(rowNum)) ? rowNum : (page.blocks.length < (grid.rows || []).length ? (page.blocks.length + 1) : 1);
       var rowConfig = (grid.rows || [])[rowIdx - 1] || { cols: 1, gap: 4 };
       var defaultWidth = 100 / (rowConfig.cols || 1);
+      
       var colCount = 0;
       for (var cb = 0; cb < page.blocks.length; cb++) {
-        if (page.blocks[cb].gridRow === rowIdx) colCount = Math.max(colCount, (page.blocks[cb].colIndex || 0));
+        if (page.blocks[cb].gridRow === rowIdx) {
+          colCount = Math.max(colCount, (page.blocks[cb].colIndex || 0));
+        }
       }
+      
       var isImage = type === 'image';
       var block = {
         id: newId,

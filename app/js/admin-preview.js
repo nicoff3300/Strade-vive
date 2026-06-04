@@ -351,12 +351,12 @@ window.AdminPreview = (function() {
   function getPageHTML(pageNum, adminState) {
     if (!adminState) return '';
     var state = adminState.getState();
-    var pageConfig = state.pages[String(pageNum)] || {};
-    var p = state.palette || {};
-    var t = state.typography || {};
-    var lay = state.layout || {};
+    var pageConfig = adminState.getPageConfig(pageNum);
+    var p = pageConfig.palette || {};
+    var t = pageConfig.typography || {};
+    var lay = pageConfig.layout || {};
     var data = state.drinksData || {};
-    var pageInfo = state.pages[String(pageNum)] || {};
+    var pageInfo = pageConfig;
     var bgId = pageInfo.backgroundId || null;
     var bgs = state.backgrounds || {};
     var bgSVG = (bgId && bgs[bgId] && bgs[bgId].svg) ? bgs[bgId].svg : '';
