@@ -442,6 +442,7 @@ window.AdminState = (function() {
       if (layoutOverride.padLeft !== undefined) layout.padLeft = layoutOverride.padLeft;
       if (layoutOverride.padRight !== undefined) layout.padRight = layoutOverride.padRight;
       if (layoutOverride.blockGap !== undefined) layout.blockGap = layoutOverride.blockGap;
+      if (layoutOverride.lineHeight !== undefined) layout.lineHeight = layoutOverride.lineHeight;
       
       var typography = Object.assign({}, state.typography || {}, typoOverride);
       var palette = Object.assign({}, state.palette || {}, paletteOverride);

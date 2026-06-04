@@ -618,13 +618,18 @@
     html += makeOverrideField('H1', 'pgH1', 'typography', 'h1', config.typography.h1, 12, 72, 1, 'pt');
     html += makeOverrideField('H2', 'pgH2', 'typography', 'h2', config.typography.h2, 10, 48, 1, 'pt');
     html += makeOverrideField('H3', 'pgH3', 'typography', 'h3', config.typography.h3, 8, 32, 1, 'pt');
+    html += makeOverrideField('Body', 'pgBody', 'typography', 'body', config.typography.body, 6, 24, 1, 'pt');
+    html += makeOverrideField('Caption', 'pgCaption', 'typography', 'caption', config.typography.caption, 5, 18, 1, 'pt');
     html += '</details>';
 
     // --- Override Spaziatura ---
     html += '<details class="pane-section"><summary class="pane-section-title">Override Spaziatura</summary>';
     html += makeOverrideField('Pad Top', 'pgPadTopOvr', 'layout', 'padTop', config.layout.padTop, 5, 80, 1, 'mm');
     html += makeOverrideField('Pad Bottom', 'pgPadBottomOvr', 'layout', 'padBottom', config.layout.padBottom, 5, 80, 1, 'mm');
+    html += makeOverrideField('Pad Left', 'pgPadLeftOvr', 'layout', 'padLeft', config.layout.padLeft, 5, 80, 1, 'mm');
+    html += makeOverrideField('Pad Right', 'pgPadRightOvr', 'layout', 'padRight', config.layout.padRight, 5, 80, 1, 'mm');
     html += makeOverrideField('Block Gap', 'pgBlockGapOvr', 'layout', 'blockGap', config.layout.blockGap, 0, 20, 1, 'mm');
+    html += makeOverrideField('Line Height', 'pgLineHeightOvr', 'layout', 'lineHeight', config.layout.lineHeight, 1.0, 2.5, 0.1, '');
     html += '</details>';
 
     // --- Contenuti ---
@@ -764,9 +769,14 @@
     bindPgOvr('pgH1', 'valPgH1', 'typography', 'h1');
     bindPgOvr('pgH2', 'valPgH2', 'typography', 'h2');
     bindPgOvr('pgH3', 'valPgH3', 'typography', 'h3');
+    bindPgOvr('pgBody', 'valPgBody', 'typography', 'body');
+    bindPgOvr('pgCaption', 'valPgCaption', 'typography', 'caption');
     bindPgOvr('pgPadTopOvr', 'valPgPadTopOvr', 'layout', 'padTop');
     bindPgOvr('pgPadBottomOvr', 'valPgPadBottomOvr', 'layout', 'padBottom');
+    bindPgOvr('pgPadLeftOvr', 'valPgPadLeftOvr', 'layout', 'padLeft');
+    bindPgOvr('pgPadRightOvr', 'valPgPadRightOvr', 'layout', 'padRight');
     bindPgOvr('pgBlockGapOvr', 'valPgBlockGapOvr', 'layout', 'blockGap');
+    bindPgOvr('pgLineHeightOvr', 'valPgLineHeightOvr', 'layout', 'lineHeight');
 
     if (config.type === 'cover') {
       bindPgInput('pgTitle', function(v) { state.drinksData.title = v; });
