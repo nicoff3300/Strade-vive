@@ -977,7 +977,14 @@ window.AdminState = (function() {
       var page = state.pages[p];
       if (!page) return null;
       if (!page.grid) page.grid = { rows: [{ id: 'r1', cols: 1, gap: 4 }], rowGap: 4 };
-      var rowId = 'r' + (page.grid.rows.length + 1);
+      
+      var ids = page.grid.rows.map(function(r) { return r.id; });
+      var counter = page.grid.rows.length + 1;
+      while (ids.indexOf('r' + counter) >= 0) {
+        counter++;
+      }
+      var rowId = 'r' + counter;
+      
       page.grid.rows.push({ id: rowId, cols: 1, gap: 4 });
       this.saveToStorage();
       return page.grid.rows[page.grid.rows.length - 1];
