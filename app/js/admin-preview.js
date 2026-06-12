@@ -123,8 +123,10 @@ window.AdminPreview = (function() {
     styles += 'background-color: ' + bgColor + ';';
 
     // Box Padding Override (in mm)
-    if (s.padding !== undefined) {
-      styles += 'padding: ' + s.padding + 'mm;';
+    var padV = s.paddingV !== undefined ? s.paddingV : (s.padding || 0);
+    var padH = s.paddingH !== undefined ? s.paddingH : (s.padding || 0);
+    if (padV > 0 || padH > 0) {
+      styles += 'padding: ' + padV + 'mm ' + padH + 'mm;';
       styles += 'box-sizing: border-box;';
     }
 

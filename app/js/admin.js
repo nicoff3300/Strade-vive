@@ -605,8 +605,13 @@
         }
         html += '</div></div>';
 
-        // Padding slider
-        html += '<div style="margin-bottom:8px;"><label style="font-size:10px;color:var(--admin-text-muted);display:block;">Padding Box <span id="valBlkPadding">' + (s.padding || 0) + '</span>mm</label><input type="range" id="blkPadding" min="0" max="24" step="1" value="' + (s.padding || 0) + '" style="width:100%;"></div>';
+        // Padding Verticale slider
+        var padV = s.paddingV !== undefined ? s.paddingV : (s.padding || 0);
+        html += '<div style="margin-bottom:8px;"><label style="font-size:10px;color:var(--admin-text-muted);display:block;">Padding Box Vert. <span id="valBlkPaddingV">' + padV + '</span>mm</label><input type="range" id="blkPaddingV" min="0" max="24" step="1" value="' + padV + '" style="width:100%;"></div>';
+
+        // Padding Orizzontale slider
+        var padH = s.paddingH !== undefined ? s.paddingH : (s.padding || 0);
+        html += '<div style="margin-bottom:8px;"><label style="font-size:10px;color:var(--admin-text-muted);display:block;">Padding Box Oriz. <span id="valBlkPaddingH">' + padH + '</span>mm</label><input type="range" id="blkPaddingH" min="0" max="24" step="1" value="' + padH + '" style="width:100%;"></div>';
 
         // Border radius slider
         html += '<div style="margin-bottom:8px;"><label style="font-size:10px;color:var(--admin-text-muted);display:block;">Arrotondamento Angoli <span id="valBlkRadius">' + (s.borderRadius || 0) + '</span>mm</label><input type="range" id="blkRadius" min="0" max="24" step="1" value="' + (s.borderRadius || 0) + '" style="width:100%;"></div>';
@@ -730,7 +735,8 @@
       bindBlockSelect('blkTransform', currentBlock.id, 'style.transform');
       bindBlockColorSwatches(currentBlock.id, s.colorKey || 'bodyColor');
       bindBlockBgColorSwatches(currentBlock.id, s.bgColorKey || '');
-      bindBlockSlider('blkPadding', 'valBlkPadding', currentBlock.id, 'style.padding');
+      bindBlockSlider('blkPaddingV', 'valBlkPaddingV', currentBlock.id, 'style.paddingV');
+      bindBlockSlider('blkPaddingH', 'valBlkPaddingH', currentBlock.id, 'style.paddingH');
       bindBlockSlider('blkRadius', 'valBlkRadius', currentBlock.id, 'style.borderRadius');
       bindBlockValignButtons(currentBlock.id, s.valign || 'center');
       bindBlockAlignButtons(currentBlock.id, s.align || 'left');
