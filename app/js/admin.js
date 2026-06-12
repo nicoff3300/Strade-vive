@@ -616,6 +616,9 @@
         // Border radius slider
         html += '<div style="margin-bottom:8px;"><label style="font-size:10px;color:var(--admin-text-muted);display:block;">Arrotondamento Angoli <span id="valBlkRadius">' + (s.borderRadius || 0) + '</span>mm</label><input type="range" id="blkRadius" min="0" max="24" step="1" value="' + (s.borderRadius || 0) + '" style="width:100%;"></div>';
 
+        // Hug width toggle
+        html += '<div style="display:flex;gap:8px;align-items:center;margin-bottom:8px;"><label style="font-size:10px;color:var(--admin-text-muted);display:block;flex:1;">Adatta larghezza al testo (Hug content)</label><div class="toggle-wrapper" style="margin:0;"><label class="toggle"><input type="checkbox" id="blkHugWidth"' + (s.hugWidth ? ' checked' : '') + '><span class="slider-switch"></span></label></div></div>';
+
         html += '</details>';
 
         // Actions
@@ -738,6 +741,7 @@
       bindBlockSlider('blkPaddingV', 'valBlkPaddingV', currentBlock.id, 'style.paddingV');
       bindBlockSlider('blkPaddingH', 'valBlkPaddingH', currentBlock.id, 'style.paddingH');
       bindBlockSlider('blkRadius', 'valBlkRadius', currentBlock.id, 'style.borderRadius');
+      bindBlockToggle('blkHugWidth', currentBlock.id, 'style.hugWidth');
       bindBlockValignButtons(currentBlock.id, s.valign || 'center');
       bindBlockAlignButtons(currentBlock.id, s.align || 'left');
       bindBlockTextarea('blkContent', currentBlock.id);
@@ -1487,6 +1491,16 @@
       var v = parseInt(el.value, 10);
       if (vl) vl.textContent = v;
       adminState.updateBlock(page, blockId, statePath, v);
+      debouncePreview();
+    });
+  }
+
+  function bindBlockToggle(id, blockId, statePath) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    var page = adminState.getState().selectedPage;
+    el.addEventListener('change', function() {
+      adminState.updateBlock(page, blockId, statePath, el.checked ? true : null);
       debouncePreview();
     });
   }

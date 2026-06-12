@@ -463,9 +463,11 @@ window.AdminPreview = (function() {
           var blkFlex = isFixed ? '1' : '0 0 auto';
           var slotWidth = blk.widthPct !== undefined ? blk.widthPct : (100 / colCount);
           var slotStyle = 'flex: ' + slotWidth + '%;min-width:0;display:flex;flex-direction:column;position:relative;';
+          var isHug = blk.style && blk.style.hugWidth;
+          var widthStyle = isHug ? 'width: fit-content; max-width: 100%; align-self: ' + (halignMap[halign] || 'flex-start') + ';' : 'width: 100%;';
           var blkStyle =
             'flex: ' + blkFlex + ';' +
-            'width: 100%;' +
+            widthStyle +
             'display: flex;' +
             'align-items: ' + alignVal + ';' +
             'justify-content: ' + justifyVal + ';' +
