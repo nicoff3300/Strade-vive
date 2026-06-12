@@ -584,6 +584,35 @@
         }
         html += '</div>';
 
+        html += '</div>';
+
+        // Box Highlights & Spacing Override (Sfondo e Spaziatura Box)
+        html += '<details class="pane-section"><summary class="pane-section-title">Evidenziazione Box</summary>';
+        
+        // Background color swatches
+        html += '<div style="margin-bottom:8px;"><label style="font-size:10px;color:var(--admin-text-muted);display:block;margin-bottom:4px;">Colore Sfondo Box</label><div class="color-swatch-grid" id="blkBgColorSwatches">';
+        var isTransparentBg = !s.bgColorKey;
+        html += '<div class="color-swatch' + (isTransparentBg ? ' active' : '') + '" data-key="" style="background:transparent;border:1px dashed var(--admin-text-muted);" title="Nessuno"></div>';
+        for (var ci = 0; ci < paletteKeys.length; ci++) {
+          var isActiveBgSwatch = s.bgColorKey === paletteKeys[ci];
+          html += '<div class="color-swatch' + (isActiveBgSwatch ? ' active' : '') + '" data-key="' + paletteKeys[ci] + '" style="background:' + paletteColors[ci] + ';"></div>';
+        }
+        var extras = adminState.getState().palette.extra || [];
+        for (var ei = 0; ei < extras.length; ei++) {
+          var extraKey = 'extra' + ei;
+          var isActiveBgExtra = s.bgColorKey === extraKey;
+          html += '<div class="color-swatch' + (isActiveBgExtra ? ' active' : '') + '" data-key="' + extraKey + '" style="background:' + extras[ei] + ';"></div>';
+        }
+        html += '</div></div>';
+
+        // Padding slider
+        html += '<div style="margin-bottom:8px;"><label style="font-size:10px;color:var(--admin-text-muted);display:block;">Padding Box <span id="valBlkPadding">' + (s.padding || 0) + '</span>mm</label><input type="range" id="blkPadding" min="0" max="24" step="1" value="' + (s.padding || 0) + '" style="width:100%;"></div>';
+
+        // Border radius slider
+        html += '<div style="margin-bottom:8px;"><label style="font-size:10px;color:var(--admin-text-muted);display:block;">Arrotondamento Angoli <span id="valBlkRadius">' + (s.borderRadius || 0) + '</span>mm</label><input type="range" id="blkRadius" min="0" max="24" step="1" value="' + (s.borderRadius || 0) + '" style="width:100%;"></div>';
+
+        html += '</details>';
+
         // Actions
         html += '<div style="display:flex;gap:4px;">';
         html += '<button class="admin-btn danger small" id="btnDeleteBlock" style="flex:1;">Elimina</button>';
@@ -700,6 +729,9 @@
       bindBlockSelect('blkWeight', currentBlock.id, 'style.weight');
       bindBlockSelect('blkTransform', currentBlock.id, 'style.transform');
       bindBlockColorSwatches(currentBlock.id, s.colorKey || 'bodyColor');
+      bindBlockBgColorSwatches(currentBlock.id, s.bgColorKey || '');
+      bindBlockSlider('blkPadding', 'valBlkPadding', currentBlock.id, 'style.padding');
+      bindBlockSlider('blkRadius', 'valBlkRadius', currentBlock.id, 'style.borderRadius');
       bindBlockValignButtons(currentBlock.id, s.valign || 'center');
       bindBlockAlignButtons(currentBlock.id, s.align || 'left');
       bindBlockTextarea('blkContent', currentBlock.id);
@@ -1418,6 +1450,39 @@
         });
       })(swatches[i]);
     }
+  }
+
+  function bindBlockBgColorSwatches(blockId, currentKey) {
+    var container = document.getElementById('blkBgColorSwatches');
+    if (!container) return;
+    var swatches = container.querySelectorAll('.color-swatch');
+    var page = adminState.getState().selectedPage;
+    for (var i = 0; i < swatches.length; i++) {
+      (function(sw) {
+        sw.addEventListener('click', function() {
+          var key = sw.getAttribute('data-key') || null;
+          adminState.updateBlock(page, blockId, 'style.bgColorKey', key);
+          for (var j = 0; j < swatches.length; j++) {
+            swatches[j].classList.remove('active');
+          }
+          sw.classList.add('active');
+          debouncePreview();
+        });
+      })(swatches[i]);
+    }
+  }
+
+  function bindBlockSlider(id, valId, blockId, statePath) {
+    var el = document.getElementById(id);
+    var vl = document.getElementById(valId);
+    if (!el) return;
+    var page = adminState.getState().selectedPage;
+    el.addEventListener('input', function() {
+      var v = parseInt(el.value, 10);
+      if (vl) vl.textContent = v;
+      adminState.updateBlock(page, blockId, statePath, v);
+      debouncePreview();
+    });
   }
 
   function bindBlockValignButtons(blockId, currentValign) {

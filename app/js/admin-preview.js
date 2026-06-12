@@ -106,6 +106,33 @@ window.AdminPreview = (function() {
       'line-height: ' + lineH + ';';
     if (transform && transform !== 'none') styles += 'text-transform: ' + transform + ';';
     if (letterSpacing) styles += 'letter-spacing: ' + letterSpacing + 'px;';
+
+    // Box Background Color Override
+    var bgColor = 'transparent';
+    if (s.bgColorKey && p) {
+      if (s.bgColorKey.indexOf('extra') === 0) {
+        var extraIdx = parseInt(s.bgColorKey.substring(5), 10);
+        var extras = p.extra || [];
+        bgColor = extras[extraIdx] || bgColor;
+      } else {
+        bgColor = p[s.bgColorKey] || bgColor;
+      }
+    } else if (s.bgColor) {
+      bgColor = s.bgColor;
+    }
+    styles += 'background-color: ' + bgColor + ';';
+
+    // Box Padding Override (in mm)
+    if (s.padding !== undefined) {
+      styles += 'padding: ' + s.padding + 'mm;';
+      styles += 'box-sizing: border-box;';
+    }
+
+    // Box Border Radius Override (in mm)
+    if (s.borderRadius !== undefined) {
+      styles += 'border-radius: ' + s.borderRadius + 'mm;';
+    }
+
     return styles;
   }
 
