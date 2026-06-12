@@ -119,6 +119,79 @@ def resolve_typo(block, t):
     ff = "Tuaf, sans-serif" if "Tuaf" in s.get("font", "") else "'ABC Camera', sans-serif"
     return ff, s.get("size", 12), s.get("weight", "normal"), s.get("transform", "none"), s.get("letterSpacing", 0), s.get("lineH", 1.4)
 
+def resolve_color(s, p, default_color="#e0e0e0", block_level=None):
+    if "colorKey" in s and p:
+        color_key = s["colorKey"]
+        if color_key.startswith("extra"):
+            try:
+                extra_idx = int(color_key[5:])
+                extras = p.get("extra", [])
+                if 0 <= extra_idx < len(extras):
+                    return extras[extra_idx]
+            except ValueError:
+                pass
+        else:
+            return p.get(color_key, default_color)
+    elif "color" in s:
+        return s["color"]
+    elif block_level and p:
+        level_color = p.get(block_level + "Color")
+        if level_color:
+            return level_color
+    return default_color
+
+def resolve_bg_color(s, p, default_color="transparent"):
+    if "bgColorKey" in s and p:
+        bg_key = s["bgColorKey"]
+        if bg_key.startswith("extra"):
+            try:
+                extra_idx = int(bg_key[5:])
+                extras = p.get("extra", [])
+                if 0 <= extra_idx < len(extras):
+                    return extras[extra_idx]
+            except ValueError:
+                pass
+        else:
+            return p.get(bg_key, default_color)
+    elif "bgColor" in s:
+        return s["bgColor"]
+    return default_color
+
+def build_block_style(block, t, p):
+    s = block.get("style", {})
+    ff, sz, wt, tr, ls, lh = resolve_typo(block, t)
+    color = resolve_color(s, p, default_color=p.get("text", "#e0e0e0"), block_level=block.get("level"))
+
+    styles = (
+        f"font-family:{ff};"
+        f"font-size:{sz}pt;"
+        f"font-weight:{wt};"
+        f"color:{color};"
+        f"text-align:{s.get('align', 'left')};"
+        f"line-height:{lh};"
+    )
+    if tr and tr != "none":
+        styles += f"text-transform:{tr};"
+    if ls:
+        styles += f"letter-spacing:{ls}px;"
+
+    # Box Background Color Override
+    bg_color = resolve_bg_color(s, p)
+    styles += f"background-color:{bg_color};"
+
+    # Box Padding Override (in mm)
+    pad_v = s.get("paddingV") if s.get("paddingV") is not None else s.get("padding", 0)
+    pad_h = s.get("paddingH") if s.get("paddingH") is not None else s.get("padding", 0)
+    if pad_v > 0 or pad_h > 0:
+        styles += f"padding:{pad_v}mm {pad_h}mm;"
+        styles += "box-sizing:border-box;"
+
+    # Box Border Radius Override (in mm)
+    if s.get("borderRadius") is not None:
+        styles += f"border-radius:{s['borderRadius']}mm;"
+
+    return styles
+
 def render_block(block, t, p):
     """Renders a single grid block as inline HTML <div>."""
     btype = block.get("type", "text")
@@ -130,12 +203,27 @@ def render_block(block, t, p):
     av = va_map.get(valign, "center")
     hv = ha_map.get(halign, "flex-start")
 
-    ff, sz, wt, tr, ls, lh = resolve_typo(block, t)
-    color = s.get("color", p.get("text", "#e0e0e0"))
+    is_fixed = s.get("fixedHeight")
+    blk_flex = "1" if is_fixed else "0 0 auto"
 
-    style = f"display:flex;align-items:{av};justify-content:{hv};flex:1;overflow:visible;font-family:{ff};font-size:{sz}pt;font-weight:{wt};color:{color};text-align:{halign};line-height:{lh};"
-    if tr and tr != "none": style += f"text-transform:{tr};"
-    if ls: style += f"letter-spacing:{ls}px;"
+    is_hug = s.get("hugWidth", False)
+    if is_hug:
+        align_self_val = ha_map.get(halign, "flex-start")
+        width_style = f"width:fit-content;max-width:100%;align-self:{align_self_val};"
+    else:
+        width_style = "width:100%;"
+
+    block_styles = build_block_style(block, t, p)
+
+    style = (
+        f"flex:{blk_flex};"
+        f"{width_style}"
+        f"display:flex;"
+        f"align-items:{av};"
+        f"justify-content:{hv};"
+        f"{block_styles}"
+        f"overflow:visible;position:relative;"
+    )
 
     content = ""
     if btype == "chart":
@@ -210,10 +298,13 @@ def render_page(page, state_data, drinks_data):
             cols_html = ""
             for si in range(cols):
                 blk = slots[si]
-                slot_style = "flex:1;min-width:0;display:flex;flex-direction:column;"
                 if blk is None:
+                    slot_width = 100 / cols
+                    slot_style = f"flex:{slot_width}%;min-width:0;display:flex;flex-direction:column;"
                     cols_html += f'<div style="{slot_style}min-height:1px;"></div>'
                 else:
+                    slot_width = blk.get("widthPct") if blk.get("widthPct") is not None else (100 / cols)
+                    slot_style = f"flex:{slot_width}%;min-width:0;display:flex;flex-direction:column;position:relative;"
                     cols_html += f'<div style="{slot_style}">{render_block(blk, t, p)}</div>'
 
             rows_html += f'<div style="{row_style}">{cols_html}</div>'
